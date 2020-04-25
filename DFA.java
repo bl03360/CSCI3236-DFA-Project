@@ -15,17 +15,14 @@ public class DFA {
 
     public static void main(String[] args) {
 
-        fileReader();
-        
-        states.toString();
-        
+        fileReader();        
         createDfa();
         
         for (int i = 0; i < states.size(); i++) {
 			System.out.println("At state " + states.get(i) + " " + outer.get(states.get(i)));
 		}
         
-        
+        userInput();
        
     }
     
