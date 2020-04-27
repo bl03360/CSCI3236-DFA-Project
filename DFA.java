@@ -19,8 +19,8 @@ public class DFA {
         createDfa();
         
         for (int i = 0; i < states.size(); i++) {
-			System.out.println("At state " + states.get(i) + " " + outer.get(states.get(i)));
-		}
+            System.out.println("At state " + states.get(i) + " " + outer.get(states.get(i)));
+        }
         
         userInput();
        
@@ -31,41 +31,41 @@ public class DFA {
         
         System.out.print("Enter a string of the alphabet, " + alph.toString() + ", to generate a proper string of the dfa.");
         String input = scan.next();
- 
-        traverseDFA(input);
         
-        
+        traverseDFA(input);       
     }
     
     private static void traverseDFA(String input) {
         if(input.charAt(0) != startState) {
             improperString();
         }
-        else if(!finalStates.contains(input.charAt(input.length()-1))) {
+        if(!finalStates.contains(input.charAt(input.length()-1))){
             improperString();
         }
         
         int a = 1;
         
         for(int i = 0;i < input.length();i++) {
-        	char marker = input.charAt(a);
-        	if(!outer.get(input.charAt(i)).containsValue(marker)) {
-        		System.out.println("you didnt work");
-        		improperString();
-        	}
-        	System.out.println("you worked");
-        	a++;
-        	if(a == input.length()) {
-        		System.out.println("you worked finally");
-        		System.exit(0);
-        	}
+            char marker = input.charAt(a);
+            if(!outer.get(input.charAt(i)).containsValue(marker)) {
+                improperString();
+            }
+            a++;
+            if(a == input.length()) {
+                properString();
+            	System.exit(0);
+            }
         }                     
     }
     
 
     private static void fileReader() {
         try {
-            File file = new File("DFA.txt");
+            Scanner scan = new Scanner(System.in);
+            System.out.println("Enter the filename of your dfa: ");
+            String filename = scan.next();
+            
+            File file = new File(filename);
             FileReader fr = new FileReader(file);
             BufferedReader br = new BufferedReader(fr);
             String line = br.readLine();
@@ -108,7 +108,6 @@ public class DFA {
                 line = br.readLine();
                 
             } // while loop to read all lines of file
-
         } // try block
         catch (IOException error) {
             error.printStackTrace();
@@ -136,5 +135,9 @@ public class DFA {
         System.out.println("The string you entered is not a proper language for this DFA");
         userInput();
     }
+    
+    private static void properString() {
+        System.out.println("The string you entered is a proper language for this DFA");
+    }
 
-}
+}//main
