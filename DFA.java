@@ -10,7 +10,7 @@ public class DFA {
     private static ArrayList<Character> alph = new ArrayList<>();
     private static ArrayList<Character> states = new ArrayList<>();
     private static ArrayList<Character> finalStates = new ArrayList<>();
-    private static LinkedList<Character> transitions = new LinkedList<>();
+    private static ArrayList<Character> transitions = new ArrayList<>();
     private static char startState;
 
     public static void main(String[] args) {
@@ -123,9 +123,10 @@ public class DFA {
     private static HashMap<Character, Character> createTransition(char a) {
         inner = new HashMap<Character, Character>();
         
-        while (transitions.peek() != null && a == transitions.peekFirst()) {
-            transitions.removeFirst();
-            inner.put(transitions.poll(), transitions.poll());
+        for(int i = 0;i < transitions.size();i+=3) {
+        	if(a == transitions.get(i)) {
+        		inner.put(transitions.get(i+1), transitions.get(i+2));
+        	}
         }
         
         return inner;
